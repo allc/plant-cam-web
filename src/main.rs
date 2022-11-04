@@ -30,7 +30,8 @@ async fn list() -> Template {
         return Template::render("index/no-pictures", context! {});
     }
     let config = get_config();
-    let object_key_list = objects.iter().map(|object| &object.key).collect::<Vec<&String>>();
+    let mut object_key_list = objects.iter().map(|object| &object.key).collect::<Vec<&String>>();
+    object_key_list.reverse();
     Template::render("list", context! {
         r2_bucket_url: config.r2_bucket_url,
         object_key_list: object_key_list,
